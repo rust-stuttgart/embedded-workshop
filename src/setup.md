@@ -59,3 +59,15 @@ Now tell udev to reload the rules with
 ```sh
 sudo udevadm control --reload
 ```
+
+## Verify your setup
+First, clone the repo of the lpc8xx-hal:
+```sh
+git clone https://github.com/lpc-rs/lpc8xx-hal/
+```
+
+Enter the directory and flash the program onto your microcontroller with
+```
+cargo flash --chip LPC845M301JBD48 --example gpio_delay --release --features 845-r
+```
+Now the blue led on your board should blink
