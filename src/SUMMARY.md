@@ -2,6 +2,8 @@
 
 [Introduction](./introduction.md)
 
+[Meet your hardware](./hardware.md)
+
 [Setup](./setup.md)
 - [GPIO Output](./gpio_output.md)
 - [GPIO Input](./gpio_input.md)
