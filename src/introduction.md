@@ -19,34 +19,6 @@ The following topics are covered in the core chapters:
   We won't be talking about linker scripts, the boot process,
   or how to glue those two into a minimally working Rust program.
 
-## What is a microcontroller?
-
-Microcontrollers are small computers, complete with some storage, ram and
-peripherals. In contrast to usual PCs, they're pretty cheap (0.05€ to 20€),
-don't have much of an os (some of the more advanced ones can run a stripped down
-version of linux) and are often remain unnoticed.
-
-They're used in a wide range of products, like:
-- Electric Toothbrushes
-- Controlling the backlight of LCDs
-- Flashlights
-- Controlling fuel injection in cars
-and much more.
-
-Pretty much everything with electronics in it has a microcontroller, simply
-because they're so cheap and versatile.
-
-These are usually bare-metal environments, where no operating system is present
-and on power on, the processor jumps to the user code. <sup><a id="fnr.1"
-class="footref" href="#fn.1">1</a></sup>
-
-Most MCUs (MicroController Units) today are programmed in C or a very C-like C++, since the
-ecosystem is typically 10-20 years behind modern software development (for
-better or for worse).
-
-TODO:
-- Photo
-- Peripheral explanation
 ## Rust
 
 This book is meant to be understandable for non-rust users, but not sufficient
@@ -69,17 +41,10 @@ While the syntax will no be explained, a couple necessary key concepts are liste
   For such targets, a stripped down version, `core`, is provided, that only
   contains features that don't require os support.
 
-TODO: 
-- expand
-So, why rust?
-Well:
-1. Just because
-2. Proper dependency managment, and thanks to [embedded-hal](https://github.com/rust-embedded/embedded-hal)
-
 ## Rust embedded ecosystem
 The rust embedded ecosystem, as propagated by the
 [embedded-wg](https://github.com/rust-embedded/wg), is based on several
-foundational crates (we're only considering arm devices here):
+ foundational crates (we're only considering arm devices here):
 - [`cortex-m`](https://github.com/rust-embedded/cortex-m) and
   [`cortex-m-rt`](https://github.com/rust-embedded/cortex-m-rt)
 
@@ -118,6 +83,3 @@ There are also some other ecosystems, which aren't discussed here, but are also 
 
 Most of the crates in the rust embedded ecosystem are listed in the
 [awesome-embedded-rust list](https://github.com/rust-embedded/awesome-embedded-rust).
-# Footnotes
-<sup><a id="fn.1" href="#fnr.1">1</a></sup> This isn't always technically
-correct. Many include a small bootloader or some very basic initialization code.

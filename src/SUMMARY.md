@@ -2,6 +2,8 @@
 
 [Introduction](./introduction.md)
 
+[Background](./background.md)
+
 [Meet your hardware](./hardware.md)
 
 [Setup](./setup.md)
