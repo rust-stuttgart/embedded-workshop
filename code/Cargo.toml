@@ -1,0 +1,11 @@
+[package]
+name = "quickstart"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+panic-halt = "0.2.0"
+lpc8xx-hal = {version = "0.6.1", features = ["845-rt"]}
+embedded-morse = {path = "/home/soryio/usr/proj/181127-embedded_rust-69/embedded-morse/"}
