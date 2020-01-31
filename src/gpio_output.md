@@ -55,7 +55,7 @@ the P1.1 pin.
    This means
 
    ```rust
-     let swm = p.SWM.spliit();
+     let swm = p.SWM.split();
      let mut syscon = p.SYSCON.split();
      let gpio = p.GPIO.enable(&mut syscon.handle);
    ```
@@ -74,10 +74,12 @@ the P1.1 pin.
 7. Now all the needed setup is done, the only thing left is getting the LED to
    blink.
 
-   This can be done by setting the pin high & low in a loop. Unfortunately this
-   is way too fast for any human to see. It can be slowed down, by repeatedly
-   setting it high/low in a loop, since setting the pin takes some amount of
-   time. A value of 1 000 000 works well in release mode.
+   This can be done by setting the pin high & low in a loop with the
+   [`OutputPin`](https://docs.rs/embedded-hal/0.2.3/embedded_hal/digital/v2/trait.OutputPin.html)
+   trait. Unfortunately this is way too fast for any human to see. It can be
+   slowed down, by repeatedly setting it high/low in a loop, since setting the
+   pin takes some amount of time. A value of 1 000 000 works well in release
+   mode.
 
     ```rust
       loop {

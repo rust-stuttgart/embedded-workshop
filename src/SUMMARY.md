@@ -8,8 +8,8 @@
 
 [Setup](./setup.md)
 - [GPIO Output](./gpio_output.md)
+- [Delay](./delay.md)
 - [GPIO Input](./gpio_input.md)
-- [Delays](./delays.md)
 - [Serial communication](./serial_communication.md)
 - [PWM](./pwm.md)
 - [Further Ideas](./ideas.md)
