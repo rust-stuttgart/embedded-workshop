@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>GPIO Output - Rust Embedded Workshop Stuttgart</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded affix "><a href="introduction.html">Introduction</a></li><li class="expanded affix "><a href="background.html">Background</a></li><li class="expanded affix "><a href="hardware.html">Meet your hardware</a></li><li class="expanded affix "><a href="setup.html">Setup</a></li><li class="expanded "><a href="gpio_output.html" class="active"><strong aria-hidden="true">1.</strong> GPIO Output</a></li><li class="expanded "><a href="delay.html"><strong aria-hidden="true">2.</strong> Delay</a></li><li class="expanded "><a href="gpio_input.html"><strong aria-hidden="true">3.</strong> GPIO Input</a></li><li class="expanded "><a href="serial_communication.html"><strong aria-hidden="true">4.</strong> Serial communication</a></li><li class="expanded "><a href="pwm.html"><strong aria-hidden="true">5.</strong> PWM</a></li><li class="expanded "><a href="ideas.html"><strong aria-hidden="true">6.</strong> Further Ideas</a></li><li class="expanded affix "><a href="acknowledgments.html">Acknowledgments</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust Embedded Workshop Stuttgart</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#gpio-output" id="gpio-output">GPIO Output</a></h1>
+<p>Most pins in a microcontroller are usually General Purpose Input Output pins.
+These can either output signals or read signals applied to them. They can be
+used for various applications, but in this case, we're using an led connected to
+the P1.1 pin.</p>
+<h2><a class="header" href="#getting-to-blinky" id="getting-to-blinky">Getting to blinky</a></h2>
+<ol>
+<li>
+<p>Go to the <code>quickstart</code> folder &amp; copy it somewhere else. This is the binary
+crate we're going to work with</p>
+</li>
+<li>
+<p>Look at what's in there</p>
+<p>There are already various things in the folder. For now, we can pretty much
+ignore every non-source file, but if you're curious, this is why they're used</p>
+<ul>
+<li>
+<p><code>.cargo/config</code></p>
+<p>In here, the target architecture for our program is defined. See the
+embedonomicon for more details on architecture</p>
+</li>
+<li>
+<p><code>memory.x</code></p>
+<p>This defines the amount and the location of flash &amp; RAM for the target.</p>
+</li>
+<li>
+<p><code>openocd.cfg</code></p>
+<p>Openocd needs some configuration to work. This contains it.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>So, what's in the <code>src/main.rs</code>?</p>
+<p>There are a couple things needed, that aren't used in normal rust programs.</p>
+<p>Let's go through them line-by-line:</p>
+<ul>
+<li>
+<p><code>#![no_std]</code></p>
+<p>The <code>std</code> library isn't implemented for microcontrollers, so it's disabled.</p>
+<p>This needs to be done in all binary &amp; library crates</p>
+</li>
+<li>
+<p><code>#![no_main]</code></p>
+<p>An embedded</p>
+</li>
+</ul>
+<ol start="3">
+<li>
+<p>The first thing that's needed when starting is getting access to the
+peripherals.</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  let p = lpc8xx_hal::Peripherals::take().unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Next, the system controller <code>SYSCON</code>, <code>GPIO</code> and the switch matrix <code>SWM</code>, that's
+controlling what each pin is used for, are brought into a usable state.
+This means</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  let swm = p.SWM.split();
+  let mut syscon = p.SYSCON.split();
+  let gpio = p.GPIO.enable(&amp;mut syscon.handle);
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>The blue led is connected to <code>PIO1_1</code>. To use it as a gpio pin, it needs to be
+configured as such in the switch matrix.</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  let led = swm.pins.pio1_1.into_gpio_pin(&amp;gpio);
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Now that it's a gpio pin, it can be configured to act as an output</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  let mut led = led.into_output();
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Now all the needed setup is done, the only thing left is getting the LED to
+blink.</p>
+<p>This can be done by setting the pin high &amp; low in a loop with the
+<a href="https://docs.rs/embedded-hal/0.2.3/embedded_hal/digital/v2/trait.OutputPin.html"><code>OutputPin</code></a>
+trait. Unfortunately this is way too fast for any human to see. It can be
+slowed down, by repeatedly setting it high/low in a loop, since setting the
+pin takes some amount of time. A value of 1 000 000 works well in release
+mode.</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  loop {
+      for _ in 0..1_000_000 {
+          led.set_high().unwrap();
+      }
+      for _ in 0..1_000_000 {
+          led.set_low().unwrap();
+      }
+  }
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Last but not least, we still need to run &amp; compile it. This can be done by
+executing <code>cargo flash --release --chip LPC845M301JBD48</code>. If everything was
+done correctly, the blue led should blink now.</p>
+</li>
+</ol>
+<p>Please note that the led is active low, it's on when the pin is set to 0V with <code>set_low()</code>.</p>
+<p>Now you can try a few more things with your newly gained knowledge:</p>
+<ul>
+<li>Try blinking the other two leds, red on <code>PIO0_2</code> and green on <code>PIO0_0</code></li>
+<li>By quickly turning the led on/off, the human eye perceives the led having a
+lowered brightness. This technique is called PWM and is almost always used for
+adjusting the brightness.</li>
+<li>…</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="setup.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="delay.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="setup.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="delay.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

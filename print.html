@@ -1,0 +1,606 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust Embedded Workshop Stuttgart</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded affix "><a href="introduction.html">Introduction</a></li><li class="expanded affix "><a href="background.html">Background</a></li><li class="expanded affix "><a href="hardware.html">Meet your hardware</a></li><li class="expanded affix "><a href="setup.html">Setup</a></li><li class="expanded "><a href="gpio_output.html"><strong aria-hidden="true">1.</strong> GPIO Output</a></li><li class="expanded "><a href="delay.html"><strong aria-hidden="true">2.</strong> Delay</a></li><li class="expanded "><a href="gpio_input.html"><strong aria-hidden="true">3.</strong> GPIO Input</a></li><li class="expanded "><a href="serial_communication.html"><strong aria-hidden="true">4.</strong> Serial communication</a></li><li class="expanded "><a href="pwm.html"><strong aria-hidden="true">5.</strong> PWM</a></li><li class="expanded "><a href="ideas.html"><strong aria-hidden="true">6.</strong> Further Ideas</a></li><li class="expanded affix "><a href="acknowledgments.html">Acknowledgments</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust Embedded Workshop Stuttgart</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<p>(feel free to skip sections you know about)</p>
+<h2><a class="header" href="#scope" id="scope">Scope</a></h2>
+<p>The following topics are covered in the core chapters:</p>
+<ul>
+<li>How to write, build and flash an embedded program.</li>
+<li>Basic operation of a GPIO, ubiquitous in microcontrollers.</li>
+</ul>
+<h2><a class="header" href="#non-goals" id="non-goals">Non-goals</a></h2>
+<ul>
+<li>
+<p>Teaching electric circuit theory or electronics.</p>
+<p>We'll cover the minimum required to understand how some devices work along the way.</p>
+</li>
+<li>
+<p>Covering Rustic, low level details.</p>
+<p>We won't be talking about linker scripts, the boot process,
+or how to glue those two into a minimally working Rust program.</p>
+</li>
+</ul>
+<h2><a class="header" href="#rust" id="rust">Rust</a></h2>
+<p>This book is meant to be understandable for non-rust users, but not sufficient
+for doing anything with the information contained herein. For learning rust
+itself, the <a href="https://doc.rust-lang.org/book/">Rust Book</a> is often recommended.
+While the syntax will no be explained, a couple necessary key concepts are listed here:</p>
+<ul>
+<li>
+<p><a href="https://doc.rust-lang.org/reference/items/traits.html">Traits</a></p>
+<p>Traits are comparable to interfaces in other languages</p>
+</li>
+<li>
+<p><a href="https://doc.rust-lang.org/reference/crates-and-source-files.html">Crates</a></p>
+<p>Crates are the compilation unit of the rust compiler and can either be
+runnable binaries or libraries to be used in other crates</p>
+</li>
+<li>
+<p>no_std</p>
+<p>The default rust standard library <code>std</code> contains features that aren't
+necessarily available on all targets, such as memory allocation or network support.
+For such targets, a stripped down version, <code>core</code>, is provided, that only
+contains features that don't require os support.</p>
+</li>
+</ul>
+<h2><a class="header" href="#rust-embedded-ecosystem" id="rust-embedded-ecosystem">Rust embedded ecosystem</a></h2>
+<p>The rust embedded ecosystem, as propagated by the
+<a href="https://github.com/rust-embedded/wg">embedded-wg</a>, is based on several
+foundational crates (we're only considering arm devices here):</p>
+<ul>
+<li>
+<p><a href="https://github.com/rust-embedded/cortex-m"><code>cortex-m</code></a> and
+<a href="https://github.com/rust-embedded/cortex-m-rt"><code>cortex-m-rt</code></a></p>
+<p>These crates provide abstractions for the ARM Cortex-M cpus and the runtime.
+This includes initializing ram, implementing interrupts and much more.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-embedded/embedded-hal"><code>embedded-hal</code></a></p>
+<p>The embedded-hal crate includes various traits, that can be used by device
+drivers to interface with external components, without being the specific to
+one MCU. The traits are usually implement by a microcontroller-specific hal.</p>
+</li>
+<li>
+<p>PACs</p>
+<p>The Peripheral Access Crates are used as a basic interface to the registers of
+the peripherals included in the microcontroller. Most are generated using
+<a href="https://github.com/rust-embedded/svd2rust">svd2rust</a>, which translated a
+manufacturer-provided
+<a href="https://www.keil.com/pack/doc/CMSIS/SVD/html/svd_Format_pg.html">svd</a> file to
+rust code.</p>
+</li>
+<li>
+<p>HALs</p>
+<p>Hardware Abstraction Libraries wrap the code generated by the PACs into
+something more usable and provide safe abstractions for the peripherals. These
+abstractions usually consist of some chip-specific setup and an implementation
+of the matching <code>embedded-hal</code> traits for actually using the peripheral</p>
+</li>
+</ul>
+<p>There are also some other ecosystems, which aren't discussed here, but are also useful:</p>
+<ul>
+<li>
+<p><a href="https://www.tockos.org/">TockOS</a></p>
+<p>TODO</p>
+</li>
+<li>
+<p><a href="https://github.com/bobbin-rs/">Bobbin</a></p>
+</li>
+</ul>
+<p>Most of the crates in the rust embedded ecosystem are listed in the
+<a href="https://github.com/rust-embedded/awesome-embedded-rust">awesome-embedded-rust list</a>.</p>
+<h1><a class="header" href="#background" id="background">Background</a></h1>
+<h2><a class="header" href="#whats-a-microcontroller" id="whats-a-microcontroller">What's a microcontroller?</a></h2>
+<p>A microcontroller is a <em>system</em> on a chip. Whereas your laptop is made up of several discrete
+components: a processor, RAM sticks, a hard drive, an ethernet port, etc.; a microcontroller has all
+those components built into a single &quot;chip&quot; or package. This makes it possible to build systems with
+minimal part count.</p>
+<h2><a class="header" href="#what-can-you-do-with-a-microcontroller" id="what-can-you-do-with-a-microcontroller">What can you do with a microcontroller?</a></h2>
+<p>Lots of things! Microcontrollers are the central part of systems known as <em>embedded</em> systems. These
+systems are everywhere but you don't usually notice them. These systems control the brakes of your
+car, wash your clothes, print your documents, keep you warm, keep you cool, optimize the fuel
+consumption of your car, etc.</p>
+<p>The main trait of these systems is that they operate without user intervention even if they expose a
+user interface like a washing machine does; most of their operation is done on their own.</p>
+<p>The other common trait of these systems is that they <em>control</em> a process. And for that these systems
+usually have one or more sensors and one or more actuators. For example, an HVAC system has several
+sensors, thermometers and humidity sensors spread across some area, and several actuators as well,
+heating elements and fans connected to ducts.</p>
+<h2><a class="header" href="#when-should-i-use-a-microcontroller" id="when-should-i-use-a-microcontroller">When should I use a microcontroller?</a></h2>
+<p>All these application I've mentioned, you can probably implement with a Raspberry Pi, a computer
+that runs Linux. Why should I bother with a microcontroller that operates without an OS? Sounds like
+it would be harder to develop a program.</p>
+<p>The main reason is cost. A microcontroller is much cheaper than a general purpose computer. Not only
+the microcontroller is cheaper; it also requires many fewer external electrical components to
+operate. This makes Printed Circuit Boards (PCB) smaller and cheaper to design and manufacture.</p>
+<p>The other big reason is power consumption. A microcontroller consumes orders of magnitude less power
+than a full blown processor. If your application will run on batteries that makes a huge difference.</p>
+<p>And last but not least: (hard) <em>real time</em> constraints. Some processes require their controllers to
+respond to some events within some time interval (e.g. a quadcopter/drone hit by a wind gust). If
+this <em>deadline</em> is not met, the process could end in catastrophic failure (e.g. the drone crashes to
+the ground). A general purpose computer  running a general purpose OS has many services running in
+the background. This makes it hard to guarantee execution of a program within tight time constraints.</p>
+<h2><a class="header" href="#when-should-i-not-use-a-microcontroller" id="when-should-i-not-use-a-microcontroller">When should I <em>not</em> use a microcontroller?</a></h2>
+<p>Where heavy computations are involved. To keep their power consumption low, microcontrollers have
+very limited computational resources available to them. For example, some microcontrollers don't
+even have hardware support for floating point operations. On those devices, performing a simple
+addition of single precision numbers can take hundreds of CPU cycles.</p>
+<h2><a class="header" href="#whats-rust" id="whats-rust">What's Rust?</a></h2>
+<p>To quote Wikipedia: &quot;Rust is a multi-paradigm system programming language
+focused on safety, especially safe concurrency. Rust is syntactically similar to
+C++, but is designed to provide better memory safety while maintaining high
+performance.&quot;</p>
+<p>Rust is a relatively new programming language, that tries to tackle the fields
+long held by C/C++: Low-level programming, without much overhead. In contrast
+it's much more ambitious in it's memory management: It tries to do it's best to
+ensure that <em>no</em> memory corruption is possible. This includes race conditions,
+buffer overflows, use after free and much more.</p>
+<p>It also has many other benefits that a lot of other newer languages share: An
+integrated build tool, <code>cargo</code>,  an opinionated
+code formatter, <code>rustfmt</code>, that much of the community has converged to and
+dependency management, that simplifies sharing code &amp; common interfaces.</p>
+<h1><a class="header" href="#meet-your-hardware" id="meet-your-hardware">Meet your hardware</a></h1>
+<p>TODO Add an annotated picture</p>
+<h2><a class="header" href="#parts" id="parts">Parts</a></h2>
+<p>The LPC845-BRK consists of two microcontrollers:</p>
+<ul>
+<li>
+<p>LPC845</p>
+<p>That's the chip you'll be programming</p>
+</li>
+<li>
+<p>LPC11U35</p>
+<p>That's the chip in the upper left corner. It acts as a debug bridge,
+allowing you to program, debug and communicate with the LPC845. It runs a
+firmware that implements the
+<a href="http://www.keil.com/support/man/docs/dapdebug/dapdebug_introduction.htm">CMSIS-DAP</a> protocol.</p>
+</li>
+</ul>
+<p>It also has some extra things:</p>
+<ul>
+<li>
+<p>RGB Led</p>
+<p>This small thing contains three leds, red, green and blue</p>
+</li>
+<li>
+<p>Buttons</p>
+<p>Things you can press</p>
+</li>
+<li>
+<p>Potentiometer</p>
+<p>An adjustable resistor, allows you to set a voltage by using it as a voltage divider</p>
+</li>
+<li>
+<p>Capacitive Button</p>
+<p>A button that can be activated by touching it. Unfortunately, getting it set
+up is pretty involved, so we're not going to do that.</p>
+</li>
+</ul>
+<h1><a class="header" href="#development-environment-setup" id="development-environment-setup">Development environment setup</a></h1>
+<p>Dealing with microcontrollers involves several tools,
+as we'll be dealing with an architecture different than your laptop's,
+and we'll have to run and debug programs on a &quot;remote&quot; device.</p>
+<h2><a class="header" href="#documentation" id="documentation">Documentation</a></h2>
+<p>Without documentation it is pretty much impossible to work with microcontrollers.</p>
+<h2><a class="header" href="#tools" id="tools">Tools</a></h2>
+<p>We'll use all the tools listed below. Where a minimum version is not specified,
+any recent version should work but we have listed the version we have tested.</p>
+<ul>
+<li>Cargo &amp; <code>rustc</code>.</li>
+<li><code>picocom</code> or similar on linux and macOS</li>
+<li><code>PuTTY</code> on Windows.</li>
+</ul>
+<p>Next, follow OS-agnostic installation instructions for a the tools:</p>
+<h2><a class="header" href="#tools-1" id="tools-1">Tools</a></h2>
+<p>Install rustup by following the instructions at <a href="https://rustup.rs">https://rustup.rs</a>.</p>
+<p>Follow the instructions to get the latest stable version of rust.
+To make sure, just execute</p>
+<pre><code class="language-sh">rustup default stable
+</code></pre>
+<p>Then you'll need to install the <code>thumbv6m-none-eabi</code> target for the cortex-m0
+cpu inside the lpc845:</p>
+<pre><code class="language-sh">rustup target add thumbv6m-none-eabi
+</code></pre>
+<p>Then we'll install <code>cargo-flash</code> using cargo:</p>
+<pre><code class="language-sh">cargo install cargo-flash
+</code></pre>
+<p>It's from the great <a href="https://github.com/probe-rs/probe-rs">probe-rs</a> project,
+and is used for getting your code onto the microcontroller.</p>
+<h3><a class="header" href="#linux" id="linux">Linux</a></h3>
+<p>Unfortunately, most linux distributions don't allow non-root applications to
+talk directly to usb devices. This means, you'd need to use root to talk to the
+debug probe, but we can just use a udev rule to fix this for these devices.</p>
+<p>You wanna add the following into a file under <code>/etc/udev/rules.d/</code>, for example <code>70-cmsis-dap.rules</code></p>
+<pre><code># CMSIS-DAP devices
+SUBSYSTEMS==&quot;usb&quot;, ATTRS{product}==&quot;*CMSIS-DAP*&quot;, GROUP=&quot;wheel&quot;, MODE=&quot;0660&quot;
+</code></pre>
+<p>Now tell udev to reload the rules with</p>
+<pre><code class="language-sh">sudo udevadm control --reload
+</code></pre>
+<h2><a class="header" href="#verify-your-setup" id="verify-your-setup">Verify your setup</a></h2>
+<p>First, clone the repo of the lpc8xx-hal:</p>
+<pre><code class="language-sh">git clone https://github.com/lpc-rs/lpc8xx-hal/
+</code></pre>
+<p>Enter the directory and flash the program onto your microcontroller with</p>
+<pre><code>cargo flash --chip LPC845M301JBD48 --example gpio_delay --release --features 845-r
+</code></pre>
+<p>Now the blue led on your board should blink</p>
+<h1><a class="header" href="#gpio-output" id="gpio-output">GPIO Output</a></h1>
+<p>Most pins in a microcontroller are usually General Purpose Input Output pins.
+These can either output signals or read signals applied to them. They can be
+used for various applications, but in this case, we're using an led connected to
+the P1.1 pin.</p>
+<h2><a class="header" href="#getting-to-blinky" id="getting-to-blinky">Getting to blinky</a></h2>
+<ol>
+<li>
+<p>Go to the <code>quickstart</code> folder &amp; copy it somewhere else. This is the binary
+crate we're going to work with</p>
+</li>
+<li>
+<p>Look at what's in there</p>
+<p>There are already various things in the folder. For now, we can pretty much
+ignore every non-source file, but if you're curious, this is why they're used</p>
+<ul>
+<li>
+<p><code>.cargo/config</code></p>
+<p>In here, the target architecture for our program is defined. See the
+embedonomicon for more details on architecture</p>
+</li>
+<li>
+<p><code>memory.x</code></p>
+<p>This defines the amount and the location of flash &amp; RAM for the target.</p>
+</li>
+<li>
+<p><code>openocd.cfg</code></p>
+<p>Openocd needs some configuration to work. This contains it.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>So, what's in the <code>src/main.rs</code>?</p>
+<p>There are a couple things needed, that aren't used in normal rust programs.</p>
+<p>Let's go through them line-by-line:</p>
+<ul>
+<li>
+<p><code>#![no_std]</code></p>
+<p>The <code>std</code> library isn't implemented for microcontrollers, so it's disabled.</p>
+<p>This needs to be done in all binary &amp; library crates</p>
+</li>
+<li>
+<p><code>#![no_main]</code></p>
+<p>An embedded</p>
+</li>
+</ul>
+<ol start="3">
+<li>
+<p>The first thing that's needed when starting is getting access to the
+peripherals.</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  let p = lpc8xx_hal::Peripherals::take().unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Next, the system controller <code>SYSCON</code>, <code>GPIO</code> and the switch matrix <code>SWM</code>, that's
+controlling what each pin is used for, are brought into a usable state.
+This means</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  let swm = p.SWM.split();
+  let mut syscon = p.SYSCON.split();
+  let gpio = p.GPIO.enable(&amp;mut syscon.handle);
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>The blue led is connected to <code>PIO1_1</code>. To use it as a gpio pin, it needs to be
+configured as such in the switch matrix.</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  let led = swm.pins.pio1_1.into_gpio_pin(&amp;gpio);
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Now that it's a gpio pin, it can be configured to act as an output</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  let mut led = led.into_output();
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Now all the needed setup is done, the only thing left is getting the LED to
+blink.</p>
+<p>This can be done by setting the pin high &amp; low in a loop with the
+<a href="https://docs.rs/embedded-hal/0.2.3/embedded_hal/digital/v2/trait.OutputPin.html"><code>OutputPin</code></a>
+trait. Unfortunately this is way too fast for any human to see. It can be
+slowed down, by repeatedly setting it high/low in a loop, since setting the
+pin takes some amount of time. A value of 1 000 000 works well in release
+mode.</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>  loop {
+      for _ in 0..1_000_000 {
+          led.set_high().unwrap();
+      }
+      for _ in 0..1_000_000 {
+          led.set_low().unwrap();
+      }
+  }
+<span class="boring">}
+</span></code></pre></pre>
+</li>
+<li>
+<p>Last but not least, we still need to run &amp; compile it. This can be done by
+executing <code>cargo flash --release --chip LPC845M301JBD48</code>. If everything was
+done correctly, the blue led should blink now.</p>
+</li>
+</ol>
+<p>Please note that the led is active low, it's on when the pin is set to 0V with <code>set_low()</code>.</p>
+<p>Now you can try a few more things with your newly gained knowledge:</p>
+<ul>
+<li>Try blinking the other two leds, red on <code>PIO0_2</code> and green on <code>PIO0_0</code></li>
+<li>By quickly turning the led on/off, the human eye perceives the led having a
+lowered brightness. This technique is called PWM and is almost always used for
+adjusting the brightness.</li>
+<li>…</li>
+</ul>
+<h1><a class="header" href="#delay" id="delay">Delay</a></h1>
+<p><code>embedded-hal</code> provides the
+<a href="https://docs.rs/embedded-hal/0.2.3/embedded_hal/blocking/delay/index.html"><code>delay</code></a>
+trait for generating precise delays. The HAL provides an implementation which
+you can access by using the
+<a href="https://docs.rs/cortex-m/0.6.2/cortex_m/peripheral/struct.SYST.html"><code>SYST</code></a> in
+the
+<a href="https://docs.rs/lpc8xx-hal/0.6.1/lpc8xx_hal/struct.Peripherals.html"><code>Peripherals</code></a>
+for the
+<a href="https://docs.rs/lpc8xx-hal/0.6.1/lpc8xx_hal/delay/struct.Delay.html"><code>Delay</code></a>
+struct.</p>
+<p>Try using it to blink the led and check if it really delays the right amount of time.</p>
+<h2><a class="header" href="#driver-crate" id="driver-crate">Driver crate</a></h2>
+<p>We can now use other driver crates to add more functionality. For this example,
+we're using the <a href="https://crates.io/crates/embedded-morse"><code>embedded-morse</code></a>
+crate to output morse messages over the led.</p>
+<p>Add the crate to the <code>Cargo.toml</code> to the <code>[dependencies]</code> section and make an
+instance in the <code>src/main.rs</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>let mut delay = lpc8xx_hal::delay::Delay::new(p.SYST);
+// the last argument inverts the output, since the led is active-low
+let mut morse = embedded_morse::Morse::new_default(delay.clone(), led, true);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Now output something using
+<a href="https://docs.rs/embedded-morse/0.1.0/embedded_morse/struct.Morse.html#method.output_str"><code>output_str</code></a>.</p>
+<p>The <code>embedded-morse</code> driver uses <em>only</em> traits from <code>embedded-hal</code>. Because of
+that, it will work on a large swath of microcontrollers, without needing to
+modify it.</p>
+<h1><a class="header" href="#gpio-input" id="gpio-input">GPIO Input</a></h1>
+<h1><a class="header" href="#serial-communication" id="serial-communication">Serial communication</a></h1>
+<h1><a class="header" href="#pwm" id="pwm">PWM</a></h1>
+<h1><a class="header" href="#further-ideas" id="further-ideas">Further Ideas</a></h1>
+<ul>
+<li>DS18B20</li>
+</ul>
+<h1><a class="header" href="#acknowledgments" id="acknowledgments">Acknowledgments</a></h1>
+<p>This book is based in part on <a href="https://github.com/droogmic/microrust">microrust</a>
+and the <a href="https://rust-embedded.github.io/discovery/">discovery book</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
