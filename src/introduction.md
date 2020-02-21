@@ -1,4 +1,6 @@
 # Introduction
+*WARNING*: This is only published because it's convenient, don't use this for anything
+
 (feel free to skip sections you know about)
 
 ## Scope
