@@ -535,6 +535,25 @@ let mut morse = embedded_morse::Morse::new_default(delay.clone(), led, true);
 that, it will work on a large swath of microcontrollers, without needing to
 modify it.</p>
 <h1><a class="header" href="#gpio-input" id="gpio-input">GPIO Input</a></h1>
+<p>Until now, the GPIO pins were only used in the output state. As the name implies,
+they can also be used as inputs. And, as was already covered, there are multiple
+buttons on the board we can use.</p>
+<h2><a class="header" href="#a-hrefhttpsenwikipediaorgwikiswitchcontact_bouncecontact-bouncea" id="a-hrefhttpsenwikipediaorgwikiswitchcontact_bouncecontact-bouncea"><a href="https://en.wikipedia.org/wiki/Switch#Contact_bounce">Contact bounce</a></a></h2>
+<p>As buttons are phyiscal devices, they're unfortunately not perfect. When
+pressing or depressing a button it flips between the pressed &amp; not state for a
+short amount of time, which needs to be kept in mind. The act of filtering this
+out is called debouncing, a common way to do it is to simply wait a few
+milliseconds after the input is changed and ignore all the changes in the
+meantime.</p>
+<h2><a class="header" href="#controlling-the-led" id="controlling-the-led">Controlling the led</a></h2>
+<p>You can switch gpio pin to input mode with:
+TODO: impl
+Now, the <code>InputPin</code> trait can be used to check the state. Try controlling the
+led with the button, so it's on when the button is pressed and off when not.</p>
+<p>Next, try to switch the led state with <code>ToggleableOutputPin</code>.
+TODO: impl</p>
+<p>Here, you'll need to consider debouncing the input signal, since otherwise the led can be
+toggled so fast, that you won't notice.</p>
 <h1><a class="header" href="#serial-communication" id="serial-communication">Serial communication</a></h1>
 <h1><a class="header" href="#pwm" id="pwm">PWM</a></h1>
 <h1><a class="header" href="#further-ideas" id="further-ideas">Further Ideas</a></h1>
